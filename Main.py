@@ -9,96 +9,83 @@ st.markdown("""
 <style>
     .main {
         background: linear-gradient(135deg, #6e8efb, #a777e3);
-        padding: 20px;
+        padding: 10px; /* Reducido de 20px */
     }
     .game-container, .rules-container {
         background: white;
-        border-radius: 15px;
-        padding: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        border-radius: 12px; /* Un poco menos */
+        padding: 16px; /* Reducido de 20px */
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
         text-align: center;
         max-width: 600px;
         margin: auto;
     }
     .level-info {
         background: #edf2f7;
-        padding: 15px;
-        border-radius: 10px;
-        margin-bottom: 20px;
+        padding: 10px; /* Reducido */
+        border-radius: 8px; /* Reducido */
+        margin-bottom: 12px; /* Reducido */
         font-weight: bold;
+        font-size: 0.95rem;
     }
     .word-display {
-        font-size: 2.5rem;
-        margin: 30px 0;
+        font-size: 2rem; /* Reducido ligeramente */
+        margin: 20px 0; /* Reducido de 30px */
         font-weight: bold;
         color: #2d3748;
-        min-height: 3rem;
+        min-height: 2.5rem;
     }
     .feedback {
-        margin: 20px 0;
-        padding: 15px;
-        border-radius: 8px;
+        margin: 12px 0; /* Reducido */
+        padding: 10px; /* Reducido */
+        border-radius: 6px;
         font-weight: bold;
-        min-height: 20px;
+        min-height: auto;
         text-align: center;
-    }
-    .correct {
-        background: #c6f6d5;
-        color: #276749;
-    }
-    .incorrect {
-        background: #fed7d7;
-        color: #9b2c2c;
+        font-size: 0.95rem;
     }
     .score {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: bold;
-        margin: 20px 0;
+        margin: 12px 0; /* Reducido */
     }
     .progress-bar {
-        width: 100%;
-        height: 20px;
+        height: 16px; /* Reducido */
         background: #edf2f7;
-        border-radius: 10px;
-        margin: 20px 0;
+        border-radius: 8px;
+        margin: 12px 0; /* Reducido */
         overflow: hidden;
-    }
-    .progress {
-        height: 100%;
-        background: #48bb78;
-        border-radius: 10px;
-        transition: width 0.5s ease;
-    }
-    .stars {
-        margin: 20px 0;
-        color: #f6e05e;
-        font-size: 1.5rem;
     }
     h1 {
         color: #4a5568;
-        margin-bottom: 10px;
-        font-size: 1.8rem;
+        margin-bottom: 8px; /* Reducido */
+        font-size: 1.6rem;
     }
     .level-title {
         color: #2b6cb0;
+        font-size: 1.15rem;
+    }
+    .stars {
+        margin: 10px 0; /* Reducido */
+        color: #f6e05e;
         font-size: 1.3rem;
     }
-    .rules-content {
-        text-align: left;
-        line-height: 1.6;
-        font-size: 1rem;
-    }
-    .rules-content h2 {
-        color: #2b6cb0;
-        margin-top: 20px;
-        border-bottom: 2px solid #ed8936;
-        padding-bottom: 5px;
-    }
-    .rules-content ul {
-        padding-left: 20px;
-    }
-    .rules-content li {
-        margin-bottom: 8px;
+
+    /* En móviles: usar una sola columna para botones */
+    @media (max-width: 600px) {
+        .word-display {
+            font-size: 1.8rem;
+        }
+        .stButton > button {
+            width: 100% !important;
+            margin-bottom: 8px;
+        }
+        /* Forzar una columna en móvil */
+        [data-testid="column"] {
+            width: 100% !important;
+            display: block !important;
+            margin: 0 !important;
+        }
     }
 </style>
 """, unsafe_allow_html=True)
