@@ -32,7 +32,8 @@ st.markdown("""
         font-size: 2rem; /* Reducido ligeramente */
         margin: 20px 0; /* Reducido de 30px */
         font-weight: bold;
-        color: #2d3748;
+        color: #e7eb08;
+        # color: #2d3748;
         min-height: 2.5rem;
     }
     .feedback {
