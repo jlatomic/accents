@@ -7,7 +7,29 @@ st.set_page_config(page_title="¡Acentos Game! - 1º ESO", layout="centered")
 # Estilos CSS personalizados (similar al HTML original)
 st.markdown("""
 <style>
-    header {visibility: hidden;}
+    div[data-testid="stToolbar"] {
+    visibility: hidden;
+    height: 0%;
+    position: fixed;
+    }
+    div[data-testid="stDecoration"] {
+    visibility: hidden;
+    height: 0%;
+    position: fixed;
+    }
+    div[data-testid="stStatusWidget"] {
+    visibility: hidden;
+    height: 0%;
+    position: fixed;
+    }
+    #MainMenu {
+    visibility: hidden;
+    height: 0%;
+    }
+    header {
+    visibility: hidden;
+    height: 0%;
+    }
     .main {
         background: linear-gradient(135deg, #6e8efb, #a777e3);
         padding: 10px; /* Reducido de 20px */
