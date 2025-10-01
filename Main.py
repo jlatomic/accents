@@ -47,7 +47,7 @@ st.markdown("""
         font-size: 2rem;
         margin: 20px 0;
         font-weight: bold;
-        color: #2d3748;
+        color: #e7eb08;
         min-height: 2.5rem;
     }
     .feedback {
