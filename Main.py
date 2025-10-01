@@ -20,14 +20,6 @@ st.markdown("""
         max-width: 600px;
         margin: auto;
     }
-    .level-info {
-        background: #edf2f7;
-        padding: 10px; /* Reducido */
-        border-radius: 8px; /* Reducido */
-        margin-bottom: 12px; /* Reducido */
-        font-weight: bold;
-        font-size: 0.95rem;
-    }
     .word-display {
         font-size: 2rem; /* Reducido ligeramente */
         margin: 20px 0; /* Reducido de 30px */
@@ -45,31 +37,10 @@ st.markdown("""
         text-align: center;
         font-size: 0.95rem;
     }
-    .score {
-        font-size: 1.1rem;
-        font-weight: bold;
-        margin: 12px 0; /* Reducido */
-    }
-    .progress-bar {
-        height: 16px; /* Reducido */
-        background: #edf2f7;
-        border-radius: 8px;
-        margin: 12px 0; /* Reducido */
-        overflow: hidden;
-    }
     h1 {
         color: #4a5568;
         margin-bottom: 8px; /* Reducido */
         font-size: 1.6rem;
-    }
-    .level-title {
-        color: #2b6cb0;
-        font-size: 1.15rem;
-    }
-    .stars {
-        margin: 10px 0; /* Reducido */
-        color: #f6e05e;
-        font-size: 1.3rem;
     }
 
     /* En móviles: usar una sola columna para botones */
@@ -322,31 +293,25 @@ else:
     st.markdown('<div class="game-container">', unsafe_allow_html=True)
     st.markdown("<h1>¡Acentos Game!</h1>", unsafe_allow_html=True)
     
-    # Información del nivel
-    st.markdown(f"""
-    <div class="level-info">
-        <div class="level-title">Nivel: {st.session_state.current_level}</div>
-        <div class="stars">★ {st.session_state.stars} / 5</div>
-    </div>
-    <div class="score">Puntuación: {st.session_state.score}</div>
-    """, unsafe_allow_html=True)
-    
+    # Información del nivel y puntuación
+    col1, col2 = st.columns(2)
+    with col1:
+        st.metric(label=f"Nivel {st.session_state.current_level}", value=f"{st.session_state.stars} / 5 ★")
+    with col2:
+        st.metric(label="Puntuación", value=st.session_state.score)
+
     # Barra de progreso
-    progress = min(100, (st.session_state.stars / 5) * 100)
-    st.markdown(f"""
-    <div class="progress-bar">
-        <div class="progress" style="width: {progress}%"></div>
-    </div>
-    """, unsafe_allow_html=True)
+    progress = st.session_state.stars / 5
+    st.progress(progress)
     
     # Palabra a acentuar
     st.markdown(f'<div class="word-display">{st.session_state.current_word["display"]}</div>', unsafe_allow_html=True)
     
     # Opciones
-    cols = st.columns(2)
+    cols = st.columns(3)
     options = ["á", "é", "í", "ó", "ú", "sin acento"]
     for i, opt in enumerate(options):
-        col = cols[i % 2]
+        col = cols[i % 3]
         if col.button(OPTION_LABELS[opt], key=f"opt_{i}", disabled=st.session_state.answered, use_container_width=True):
             # Verificar respuesta
             if opt == st.session_state.current_word["correct"]:
@@ -369,14 +334,19 @@ else:
         cls = st.session_state.feedback_class
         st.markdown(f'<div class="feedback {cls}">{st.session_state.feedback}</div>', unsafe_allow_html=True)
     
-    # Botón "Siguiente palabra"
+    # Botones de acción
     if st.session_state.answered:
-        if st.button("Siguiente palabra", key="next_btn", use_container_width=True):
+        col1, col2 = st.columns(2)
+        if col1.button("Siguiente palabra", key="next_btn", use_container_width=True):
             load_new_word()
             st.rerun()
-    
-    # Botón "Reglas"
-    if st.button("Reglas de acentuación", key="rules_btn", use_container_width=True):
-        show_rules()
+        if col2.button("Reglas de acentuación", key="rules_btn", use_container_width=True):
+            show_rules()
+            st.rerun() # To show the rules immediately
+    else:
+        # Ocupa todo el ancho si no hay botón de "Siguiente"
+        if st.button("Reglas de acentuación", key="rules_btn", use_container_width=True):
+            show_rules()
+            st.rerun() # To show the rules immediately
     
     st.markdown('</div>', unsafe_allow_html=True)
