@@ -196,7 +196,7 @@ def run_accents_game():
     with col2:
         st.metric(label="Puntuación", value=st.session_state.score)
 
-    st.progress(st.session_state.stars / 5)
+    st.progress(min(1.0, st.session_state.stars / 5))
     
     st.markdown(f'<div class="word-display">{st.session_state.current_word["display"]}</div>', unsafe_allow_html=True)
 
@@ -294,7 +294,7 @@ def run_bv_game():
     with col2:
         st.metric(label="Puntuación", value=st.session_state.score)
 
-    st.progress(st.session_state.stars / 5)
+    st.progress(min(1.0, st.session_state.stars / 5))
     
     st.markdown(f'<div class="word-display">{st.session_state.current_word["display"]}</div>', unsafe_allow_html=True)
 
