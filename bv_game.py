@@ -277,13 +277,16 @@ def run_bv_game():
     st.markdown('<div class="game-container">', unsafe_allow_html=True)
     st.markdown("<h1>Juego de B o V</h1>", unsafe_allow_html=True)
 
+    # Determinar el número total de palabras en el nivel actual
+    total_words_in_level = len(WORD_BANK_BV[st.session_state.current_level])
+
     col1, col2 = st.columns(2)
     with col1:
-        st.metric(label=f"Nivel {st.session_state.current_level}", value=f"{st.session_state.stars} / 5 ★")
+        st.metric(label=f"Nivel {st.session_state.current_level}", value=f"{st.session_state.stars} / {total_words_in_level} ★")
     with col2:
         st.metric(label="Puntuación", value=st.session_state.score)
 
-    st.progress(min(1.0, st.session_state.stars / 5))
+    st.progress(min(1.0, st.session_state.stars / total_words_in_level))
     
     st.markdown(f'<div class="word-display">{st.session_state.current_word["display"]}</div>', unsafe_allow_html=True)
 
@@ -296,7 +299,7 @@ def run_bv_game():
                 st.session_state.feedback = f'¡Correcto! La palabra es "{st.session_state.current_word["answer"]}" 🎉'
                 st.session_state.score += 10 * st.session_state.current_level
                 st.session_state.stars += 1
-                if st.session_state.stars >= 5:
+                if st.session_state.stars >= total_words_in_level:
                     level_up_bv()
             else:
                 st.session_state.feedback = f'Incorrecto. La palabra correcta es "{st.session_state.current_word["answer"]}"'
