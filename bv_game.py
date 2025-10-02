@@ -299,7 +299,7 @@ def run_bv_game():
                 st.session_state.feedback = f'¡Correcto! La palabra es "{st.session_state.current_word["answer"]}" 🎉'
                 st.session_state.score += 10 * st.session_state.current_level
                 st.session_state.stars += 1
-                if st.session_state.stars >= total_words_in_level:
+                if st.session_state.stars == total_words_in_level:
                     level_up_bv()
             else:
                 st.session_state.feedback = f'Incorrecto. La palabra correcta es "{st.session_state.current_word["answer"]}"'
